@@ -1,0 +1,25 @@
+version: "3"
+services:
+  validator:
+    build: ./validator
+    links:
+      - mysql1
+    networks:
+      - my-net
+    ports:
+      - "8080:8080"
+  mysql1:
+    image: mysql/mysql-server
+    ports:
+      - "3307:3307"
+    networks:
+      - my-net
+    environment:
+      MYSQL_HOST: mysql1
+      MYSQL_USER: sa
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: UID
+      MYSQL_ROOT_PASSWORD: root
+      
+networks:
+  my-net:
